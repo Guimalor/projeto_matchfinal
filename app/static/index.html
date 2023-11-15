@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <title>Document</title>
+    
+
+</head>
+<body>
+    <div class="box">
+        <div class="img-box">
+           
+        </div>
+        <div class="form-box">
+            <h2>Contrate aqui seu 
+                empréstimo</h2>
+            <p> Já fez uma simulação? <a href="#"> Simule aqui ! </a> </p>
+            <form action='/calcular' method="post">
+               
+                <div class="input-group">
+                    <label for="renda">Informe o valor da sua renda</label>
+                    <input type="number" name="renda" placeholder="Digite " required>
+                </div>
+                   
+
+                <div class="input-group w50">
+                    <label for="valordoemprestimo">Valor do empréstimo</label>
+                    <input type="number" name="valor" placeholder="empréstimo" required>
+                </div>
+
+                <div class="input-group w50">
+                    <label for="Confirmarparcelas">Confirmar parcelas</label>
+                    <input type="number" name="prazo" placeholder="Confirmar parcelas" required>
+                </div>
+
+                <div class="input-group">
+                    <input type="submit" value="Simular emopréstimo"></input>
+                 
+                </div>
+             
+                {%if resultado.valid ==True%}
+                    <div class="input-group">
+                       <p style="color: green;">O valor da parcela sera {{resultado.parcelas}}</p>
+                       <p style="color: green;">O valor total do empréstimo sera {{resultado.total}}</p>
+                    </div> 
+                {%elif resultado.error !="" %}
+                <p style="color:red;">{{resultado.error}}</p>
+                {%endif%}
+                    
+            </form>
+        </div>
+    </div>
+</body>
+</html>
